@@ -1,0 +1,62 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const db = require('_helpers/db');
+const autopopulate = require('_helpers/autopopulate');
+const schema = new Schema({
+OBJECT_TYPE: { type: String, required: false },
+NAME: { type: String, required: false },
+A_ID: { type: String, required: false },
+A_APPLICATION_COMPONENT_SPEC: [{ type: Schema.Types.Mixed, required: false }],
+A_APP_CMP_TYPE: [{ type: Schema.Types.Mixed, required: false }],
+A_DESCRIPTION: { type: String, required: false },
+RC_ASSOCIATED_VIEWS: { type: String, required: false },
+A_NEED_FOR_ACTION: { type: String, required: false },
+A_EXPLANATION: { type: String, required: false },
+RC_IS_APPLICATION_OWNER: { type: String, required: false },
+RC_ACCOUNTABLE_PERSON: { type: String, required: false },
+RC_CONSULTED_PERSON: { type: String, required: false },
+RC_INFORMED_PERSON: { type: String, required: false },
+RC_VENDOR: { type: String, required: false },
+A_ADDITIONAL_INFORMATION_ON_ORGANISATION: { type: String, required: false },
+RC_REALIZATION__C_APPLICATION_COMPONENT: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_COMPONENT', required: false , autopopulate: true}],
+RC_REALIZATION__C_APPLICATION_INTERFACE: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_INTERFACE', required: false , autopopulate: true}],
+RC_ASSIGNMENT: { type: String, required: false },
+RC_AGGREGATION__C_APPLICATION_COMPONENT: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_COMPONENT', required: false, autopopulate: true }],
+RC_AGGREGATION__C_APPLICATION_INTERFACE: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_INTERFACE', required: false, autopopulate: true }],
+RC_COMPOSITION__C_APPLICATION_COMPONENT: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_COMPONENT', required: false, autopopulate: true  }],
+RC_COMPOSITION__C_APPLICATION_INTERFACE: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_INTERFACE', required: false, autopopulate: true  }],
+RC_INFLUENCE:  { type: String, required: false },
+RC_ACCESS: { type: String, required: false },
+RC_SERVING__C_SYSTEM_SOFTWARE: [{ type: Schema.Types.ObjectId, ref: 'C_SYSTEM_SOFTWARE', required: false, autopopulate: true  }],
+RC_SERVING__C_APPLICATION_COMPONENT: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_COMPONENT', required: false, autopopulate: true  }],
+RC_SERVING__C_APPLICATION_INTERFACE: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_INTERFACE', required: false, autopopulate: true  }],
+RC_TRIGGERING__C_SYSTEM_SOFTWARE: [{ type: Schema.Types.ObjectId, ref: 'C_SYSTEM_SOFTWARE', required: false, autopopulate: true  }],
+RC_TRIGGERING__C_APPLICATION_COMPONENT: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_COMPONENT', required: false, autopopulate: true  }],
+RC_TRIGGERING__C_APPLICATION_INTERFACE: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_INTERFACE', required: false, autopopulate: true  }],
+RC_FLOW__C_SYSTEM_SOFTWARE: [{ type: Schema.Types.ObjectId, ref: 'C_SYSTEM_SOFTWARE', required: false, autopopulate: true  }],
+RC_FLOW__C_APPLICATION_COMPONENT: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_COMPONENT', required: false, autopopulate: true  }],
+RC_FLOW__C_APPLICATION_INTERFACE: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_INTERFACE', required: false, autopopulate: true  }],
+RC_SPECIALIZATION__C_APPLICATION_COMPONENT: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_COMPONENT', required: false, autopopulate: true  }],
+RC_ASSOCIATION__C_SYSTEM_SOFTWARE: [{ type: Schema.Types.ObjectId, ref: 'C_SYSTEM_SOFTWARE', required: false, autopopulate: true  }],
+RC_ASSOCIATION__C_APPLICATION_COMPONENT: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_COMPONENT', required: false, autopopulate: true  }],
+RC_ASSOCIATION__C_APPLICATION_INTERFACE: [{ type: Schema.Types.ObjectId, ref: 'C_APPLICATION_INTERFACE', required: false, autopopulate: true  }],
+A_APPL_CATEGORY: [{ type: Schema.Types.Mixed, required: false }],
+A_CUSTOMISATION_LEVEL: [{ type: Schema.Types.Mixed, required: false }],
+A_APPL_STRATEGIC_VALUE: [{ type: Schema.Types.Mixed, required: false }],
+A_BUSINESS_FITNESS: [{ type: Schema.Types.Mixed, required: false }],
+A_IT_FITNESS: [{ type: Schema.Types.Mixed, required: false }],
+A_COST_FITNESS: [{ type: Schema.Types.Mixed, required: false }],
+A_BUSINESS_CONTINUITY_FIT: [{ type: Schema.Types.Mixed, required: false }],
+A_SECURITY_FIT: [{ type: Schema.Types.Mixed, required: false }],
+A_APPL_NUMBER_OF_USERS: { type: String, required: false },
+A_EXTERNAL_APPLICATION: { type: String, required: false },
+A_AVAILABILITY: [{ type: Schema.Types.Mixed, required: false }],
+A_CONFIDENTIALITY: [{ type: Schema.Types.Mixed, required: false }],
+A_INTEGRITY: [{ type: Schema.Types.Mixed, required: false }],
+user: { type: Schema.Types.ObjectId, ref: 'User', required: false },
+createdDate: { type: Date, default: Date.now }
+});
+//schema.set('toJSON', { virtuals: true });
+//schema.plugin(autopopulate);
+schema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('C_APPLICATION_COMPONENT', schema);
