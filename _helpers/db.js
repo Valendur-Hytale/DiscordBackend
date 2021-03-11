@@ -17,10 +17,5 @@ connectWithRetry();
 //mongoose.Promise = global.Promise;
 
 module.exports = {
-C_APPLICATION_COMPONENT: require('../objects/C_APPLICATION_COMPONENT/C_APPLICATION_COMPONENT.model'),
-C_APPLICATION_INTERFACE: require('../objects/C_APPLICATION_INTERFACE/C_APPLICATION_INTERFACE.model'),
-C_SYSTEM_SOFTWARE: require('../objects/C_SYSTEM_SOFTWARE/C_SYSTEM_SOFTWARE.model'),
-User: require('../users/user.model'),
-Member: require('../member/member.model'),
-	Setting: require('../settings/setting.model')
+    Member: require('../member/member.model'),
 };
