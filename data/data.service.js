@@ -38,6 +38,7 @@ async function getById(id) {
 }
 
 async function addData(params) {
+  console.log("add data");
   const idHash = bcrypt.hashSync(params.userID, 10);
 
   let data = await Data.findOne({ userID: idHash });
