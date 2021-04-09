@@ -39,11 +39,11 @@ async function getById(id) {
 
 async function addData(params) {
   console.log("add data" + params.userID);
-  const idHash = bcrypt.hashSync(params.userID, 10);
+  //const idHash = bcrypt.hashSync(params.userID, 10);
 
-  let data = await Data.findOne({ userID: idHash });
+  let data = await Data.findOne({ userID: params.userID });
   if (!data) {
-    data = new Data({ userID: idHash });
+    data = new Data({ userID: params.userID });
     data.dataLog = [];
   }
   data.dataLog.push(params.dataLog);
