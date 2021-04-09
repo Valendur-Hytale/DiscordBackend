@@ -1,6 +1,6 @@
 ﻿const express = require("express");
 const router = express.Router();
-const userService = require("./member.service");
+const userService = require("./data.service");
 
 // routes
 router.post("/addData", addData);
