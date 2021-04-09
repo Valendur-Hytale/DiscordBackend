@@ -18,7 +18,7 @@ async function authenticate({ membername, password }) {
 }
 
 async function getAll() {
-    return await Member.find().sort({"currentExp" : -1}).select('-_id -rank -messages -id -expForCurrentLevel -expForNextLevel' );//.select('-hash');
+    return await Member.find().sort({"currentExp" : -1}).select('-_id -rank -messages -id -expForCurrentLevel -expForNextLevel -levelUp' );//.select('-hash');
 }
 
 async function getById(id) {
