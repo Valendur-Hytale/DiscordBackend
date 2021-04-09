@@ -7,7 +7,7 @@ const schema = new Schema({
     {
       eventType: { type: String, required: true },
       data: { type: Object, required: true },
-      timestamp: { type: Date, defaul: Date.now },
+      timestamp: { type: Date, default: Date.now },
     },
   ],
 });
