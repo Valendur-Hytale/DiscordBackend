@@ -11,11 +11,7 @@ module.exports = {
 };
 
 async function getAll() {
-  return await Data.find()
-    .sort({ currentExp: -1 })
-    .select(
-      "-_id -rank -messages -id -expForCurrentLevel -expForNextLevel -levelUp"
-    ); //.select('-hash');
+  return await Data.find().select("-_id"); //.select('-hash');
 }
 
 async function getById(id) {
