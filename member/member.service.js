@@ -87,9 +87,8 @@ async function setBirthday(params) {
   let member = await Member.findOne({ userID: params.userID });
   if (!member) {
     member = new Member({ userID: params.userID });
-  } else {
-    member.birthday = new Date(2021, params.month, params.day, 4);
-  }
+  } 
+  member.birthday = new Date(2021, params.month, params.day, 4);
   member.save();
 }
 
