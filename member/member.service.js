@@ -9,6 +9,7 @@ module.exports = {
   addExp,
   setBirthday,
   getAll,
+  getAllPublic,
   getById,
   create,
   update,
@@ -25,12 +26,20 @@ async function getAll() {
     ); //.select('-hash');
 }
 
+async function getAllPublic() {
+  return await Member.find()
+    .sort({ currentExp: -1 })
+    .select(
+      "-_id -rank -messages -id -expForCurrentLevel -expForNextLevel -levelUp -__v -firstLogin -userID -birthday"
+    ); //.select('-hash');
+}
+
 async function getById(id) {
   //var member;
   var i = 1;
   var members = await Member.find().sort({ currentExp: -1 });
   for (let member of members) {
-    console.log("member: " + JSON.stringify(member));
+    //console.log("member: " + JSON.stringify(member));
     if (member.userID === id) {
       member.expForCurrentLevel = getLevelXPNeeded(member.currentLevel);
       member.expForNextLevel = getLevelXPNeeded(member.currentLevel + 1);
@@ -57,7 +66,7 @@ async function addExp(params) {
   }
 
   const currentLvl = member.currentLevel;
-  console.log("current level: " + currentLvl);
+  //console.log("current level: " + currentLvl);
   member.currentExp += params.exp;
   member.dailyExp += params.exp;
   member.weeklyExp += params.exp;
@@ -65,20 +74,20 @@ async function addExp(params) {
   //member.addExp(params.exp);
 
   member = levelUp(member);
-  console.log(
+  /*console.log(
     "current level after lvl up: " +
       currentLvl +
       "new level: " +
       member.currentLevel
-  );
+  );*/
   member.save();
 
   if (member.currentLevel > currentLvl) {
-    console.log("level up true");
+    //console.log("level up true");
     member["levelUp"] = true;
   }
 
-  console.log("Returning: " + JSON.stringify(member));
+  //console.log("Returning: " + JSON.stringify(member));
   return member;
 }
 
@@ -109,7 +118,7 @@ function levelUp(member) {
 }
 
 async function create(memberParam) {
-  console.log("should create a member now");
+  //console.log("should create a member now");
   // validate
   if (await Member.findOne({ membername: memberParam.membername })) {
     throw 'Membername "' + memberParam.membername + '" is already taken';

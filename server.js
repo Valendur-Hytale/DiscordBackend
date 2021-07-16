@@ -16,6 +16,25 @@ app.use(cors());
 // use JWT auth to secure the api
 //app.use(jwt());
 
+var public = ["/members/public"]
+app.use(function(req, res, next) {
+  var url = req.originalUrl.replace(/\/\s*$/, "");
+  if (public.includes(url)){
+    next();
+    return;
+  }
+  var ip = req.connection.remoteAddress.replace(/^.*:/, '');
+  //console.log(ip);
+  //console.log(req.originalUrl.replace(/\/\s*$/, ""))
+  if (ip == '1' || ip == '127.0.0.1' || ip == 'localhost'){
+    //console.log("next");
+    next();
+  } else {
+    res.status(404).end();
+  }
+});
+
+
 // api routes
 app.use("/members", require("./member/member.controller"));
 app.use("/data", require("./data/data.controller"));

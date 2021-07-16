@@ -7,6 +7,7 @@ router.post("/addExp", addExp);
 router.post("/setBirthday", setBirthday);
 router.post("/call", register);
 router.get("/", getAll);
+router.get("/public", getAllPublic);
 router.get("/current", getCurrent);
 router.get("/:id", getById);
 router.delete("/:id", _delete);
@@ -34,6 +35,13 @@ function register(req, res, next) {
 function getAll(req, res, next) {
   userService
     .getAll()
+    .then((users) => res.json(users))
+    .catch((err) => next(err));
+}
+
+function getAllPublic(req, res, next) {
+  userService
+    .getAllPublic()
     .then((users) => res.json(users))
     .catch((err) => next(err));
 }
