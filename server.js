@@ -42,6 +42,20 @@ app.use("/data", require("./data/data.controller"));
 // global error handler
 app.use(errorHandler);
 
+await Member.updateMany({}, { $set: { dailyExp: 0, weeklyExp: 0, monthlyExp: 0, messages: 0, currentExp: 0, currentLevel: 0} });
+
+const dailyExpReset = schedule.scheduleJob("0 0 * * *", async function () {
+  const mem = await Member.updateMany({}, { $set: { dailyExp: 0 } });
+});
+
+const weeklyExpReset = schedule.scheduleJob("0 0 * * 1", async function () {
+  await Member.updateMany({}, { $set: { weeklyExp: 0 } });
+});
+
+const mothlyExpReset = schedule.scheduleJob("0 0 1 * *", async function () {
+  await Member.updateMany({}, { $set: { monthlyExp: 0 } });
+});
+
 // start server
 const port =
   process.env.NODE_ENV === "production" ? process.env.PORT || 80 : 4000;
@@ -49,14 +63,4 @@ const server = app.listen(port, function () {
   console.log("Server listening on port " + port);
 });
 
-const dailyExpReset = schedule.scheduleJob("0 0 * * *", function () {
-  Member.updateMany({}, { $set: { dailyExp: 0 } });
-});
 
-const weeklyExpReset = schedule.scheduleJob("0 0 * * 0", function () {
-  Member.updateMany({}, { $set: { weeklyExp: 0 } });
-});
-
-const mothlyExpReset = schedule.scheduleJob("0 0 1 * *", function () {
-  Member.updateMany({}, { $set: { monthlyExp: 0 } });
-});
