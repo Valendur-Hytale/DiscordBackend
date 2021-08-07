@@ -42,10 +42,12 @@ app.use("/data", require("./data/data.controller"));
 // global error handler
 app.use(errorHandler);
 
-await Member.updateMany({}, { $set: { dailyExp: 0, weeklyExp: 0, monthlyExp: 0, messages: 0, currentExp: 0, currentLevel: 0} });
 
-const dailyExpReset = schedule.scheduleJob("0 0 * * *", async function () {
-  const mem = await Member.updateMany({}, { $set: { dailyExp: 0 } });
+
+const dailyExpReset = schedule.scheduleJob("4 0 * * *", async function () {
+console.log("resetting");
+  const mem = await Member.updateMany({}, { $set: { dailyExp: 0} });
+
 });
 
 const weeklyExpReset = schedule.scheduleJob("0 0 * * 1", async function () {
