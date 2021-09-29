@@ -14,6 +14,7 @@ module.exports = {
   create,
   update,
   delete: _delete,
+  addMeditateTime,
 };
 
 async function authenticate({ membername, password }) {}
@@ -32,6 +33,18 @@ async function getAllPublic() {
     .select(
       "-_id -rank -messages -id -expForCurrentLevel -expForNextLevel -levelUp -__v -firstLogin -userID -birthday"
     ); //.select('-hash');
+}
+
+async function addMeditateTime(params) {
+  let member = await Member.findOne({ userID: params.userID });
+  if (!member) {
+    member = new Member({ userID: params.userID });
+  } else {
+    Object.assign(member, params);
+  }
+  member.meditateTime += params.meditateTime;
+  member.save();
+  return member;
 }
 
 async function getById(id) {

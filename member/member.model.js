@@ -17,6 +17,7 @@ const schema = new Schema({
   expForCurrentLevel: { type: Number, default: 0 },
   expForNextLevel: { type: Number, default: 0 },
   rank: { type: Number, default: -1 },
+  meditateTime: { type: Number, default: 0 }
 });
 
 schema.set("toJSON", { virtuals: true });

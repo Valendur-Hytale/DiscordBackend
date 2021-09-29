@@ -4,6 +4,7 @@ const userService = require("./member.service");
 
 // routes
 router.post("/addExp", addExp);
+router.post("/addMeditateTime", addMeditateTime);
 router.post("/setBirthday", setBirthday);
 router.post("/call", register);
 router.get("/", getAll);
@@ -66,6 +67,14 @@ function addExp(req, res, next) {
     .then((member) => res.json(member))
     .catch((err) => next(err));
 }
+
+function addMeditateTime(req, res, next) {
+  userService
+    .addMeditateTime(req.body)
+    .then((member) => res.json(member))
+    .catch((err) => next(err));
+}
+
 
 function setBirthday(req, res, next) {
   userService
