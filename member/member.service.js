@@ -39,8 +39,6 @@ async function addMeditateTime(params) {
   let member = await Member.findOne({ userID: params.userID });
   if (!member) {
     member = new Member({ userID: params.userID });
-  } else {
-    Object.assign(member, params);
   }
   member.meditateTime += params.meditateTime;
   member.save();

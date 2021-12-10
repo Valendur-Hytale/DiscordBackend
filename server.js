@@ -38,6 +38,7 @@ app.use(function(req, res, next) {
 // api routes
 app.use("/members", require("./member/member.controller"));
 app.use("/data", require("./data/data.controller"));
+app.use("/prime", require("./prime/prime.controller"));
 
 // global error handler
 app.use(errorHandler);

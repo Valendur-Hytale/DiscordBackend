@@ -26,4 +26,5 @@ connectWithRetry();
 module.exports = {
   Member: require("../member/member.model"),
   Data: require("../data/data.model"),
+  Prime:  require("../prime/prime.model"),
 };
