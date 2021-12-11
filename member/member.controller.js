@@ -6,32 +6,11 @@ const userService = require("./member.service");
 router.post("/addExp", addExp);
 router.post("/addMeditateTime", addMeditateTime);
 router.post("/setBirthday", setBirthday);
-router.post("/call", register);
 router.get("/", getAll);
-router.get("/public", getAllPublic);
-router.get("/current", getCurrent);
-router.get("/:id", getById);
 router.delete("/:id", _delete);
 
 module.exports = router;
 
-function authenticate(req, res, next) {
-  userService
-    .authenticate(req.body)
-    .then((user) =>
-      user
-        ? res.json(user)
-        : res.status(400).json({ message: "Username or password is incorrect" })
-    )
-    .catch((err) => next(err));
-}
-
-function register(req, res, next) {
-  userService
-    .create(req.body)
-    .then(() => res.json({}))
-    .catch((err) => next(err));
-}
 
 function getAll(req, res, next) {
   userService

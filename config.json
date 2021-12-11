@@ -1,4 +1,4 @@
 ﻿{
-    "connectionString": "mongodb://localhost/valendurDC",
+    "connectionString": "mongodb://localhost/CUEBOT",
     "secret": "irrelevant"
 }
